@@ -95,7 +95,7 @@ request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json", func
   if (!error && response.statusCode === 200) {
     // Parse the body of the site and recover just the imdbRating
     // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-    console.log("Movie:" + JSON.parse(body).Title);
+    console.log("Movie: " + JSON.parse(body).Title);
     console.log("Release Year: " + JSON.parse(body).Year);
     console.log("Rating: " + JSON.parse(body).imdbRating);
     console.log("Production Country: " + JSON.parse(body).Country);
