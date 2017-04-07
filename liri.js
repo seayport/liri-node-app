@@ -93,8 +93,7 @@ function runMovie(){
 request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json", function(error, response, body) {
   // If the request is successful
   if (!error && response.statusCode === 200) {
-    // Parse the body of the site and recover just the imdbRating
-    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+    // Parse the body of the site and recover just the data you request
     console.log("Movie: " + JSON.parse(body).Title);
     console.log("Release Year: " + JSON.parse(body).Year);
     console.log("Rating: " + JSON.parse(body).imdbRating);
@@ -109,15 +108,19 @@ request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json", func
 
 function getRandom() {
 fs.readFile("random.txt", "utf8", function(error, data) {
-	var myArr = data.split(",")
-	if (myArr[0] = "spotify-this-song");
-	songName = myArr[1];
+	var randomArr = data.split(",")
+	if (randomArr[0] === "spotify-this-song") {
+	songName = randomArr[1];
 	runSong();
-	// if (myArr[0] = "my-tweets");
-	// getTweets();
-	// if (myArr[0] = "movie-this");
-	// movieName = myArr[1];
-	// getMovie();
-	})//end of readFile 
+	} if (randomArr[0] === "movie-this") {
+	movieName = randomArr[1];
+	runMovie();
+	}
+	else {
+	randomArr[0] === "my-tweets";
+	getTweets();
+	}
+	
+  })//end of readFile 
 
 }//end of getDoit
