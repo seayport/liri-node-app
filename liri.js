@@ -1,4 +1,3 @@
-console.log('starting liri.js');
 
 var twitter = require('twitter');
 var spotify = require('spotify');
@@ -8,6 +7,7 @@ var fs = require('fs');
 
 //storing the user input (command line argument) to determine action
 var userAction = process.argv[2];
+
 
 // Twitter-Grabs the keys variables
 var keys = require("./keys.js");
@@ -36,7 +36,7 @@ switch (userAction) {
     break;
 
   case "do-what-it-says":
-    request();
+    getRandom();
     break;
 }
 // That is the end of actions
@@ -106,3 +106,18 @@ request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json", func
   		}
 	});
 }
+
+function getRandom() {
+fs.readFile("random.txt", "utf8", function(error, data) {
+	var myArr = data.split(",")
+	if (myArr[0] = "spotify-this-song");
+	songName = myArr[1];
+	runSong();
+	// if (myArr[0] = "my-tweets");
+	// getTweets();
+	// if (myArr[0] = "movie-this");
+	// movieName = myArr[1];
+	// getMovie();
+	})//end of readFile 
+
+}//end of getDoit
