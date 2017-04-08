@@ -1,5 +1,9 @@
-function (err) {
-                 if (err) {
-                console.log(err);
-                 } 
-     }
+
+
+Movie: Fences
+Release Year: 2016
+Rating: 7.4
+Production Country: USA
+Language: EnglishPlot: 
+A working-class African-American father tries to raise his family in the 1950s, while coming to terms with the events of his life.Actors: Denzel Washington, Viola Davis, Stephen Henderson, Jovan Adepo
+Rotten Tomatoes Rating: 93%
