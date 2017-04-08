@@ -47,12 +47,12 @@ function getTweets() {
             for (var i = 0; i < tweets.length; i++) {
                 console.log(tweets[i].created_at);
                 console.log('%j \n', tweets[i].text);
-                var tweetData = ('\n' + tweets[i].created_at + '\n' + tweets[i].text + '\n');
+                var tweetData = '\n' + tweets[i].created_at + '\n' + tweets[i].text + '\n';
                 writeLog (tweetData);
             }
         }
     });
-}
+};
 // end of Twitter function
 // ---------------------------------------------------------------------------------------------------------------
 //spotify-this-song function--------------------------------------------------------------------------------------
@@ -76,10 +76,14 @@ function runSong() {
         console.log(data.tracks.items[0].name);
         console.log(data.tracks.items[0].preview_url);
         console.log(data.tracks.items[0].album.name);
-        var songData = ('\n' + data.tracks.items[0].album.artists[0].name + '\n' + data.tracks.items[0].name + '\n' + data.tracks.items[0].preview_url + '\n' + data.tracks.items[0].album.name + '\n');
+        var songData = '\n' + data.tracks.items[0].album.artists[0].name 
+        songData += '\n' + data.tracks.items[0].name
+        songData += '\n' + data.tracks.items[0].preview_url
+        songData += '\n' + data.tracks.items[0].album.name + '\n';
         writeLog (songData);
     });
-} //end of spotify function-------------------------------------------------------------------------------------------
+}
+ //end of spotify function-------------------------------------------------------------------------------------------
 // movie-this function------------------------------------------------------------------------------------------------
 function getMovie() {
     if (process.argv.length < 4) {
@@ -89,7 +93,7 @@ function getMovie() {
         movieName = process.argv[3];
         runMovie();
     }
-} //end of getMovie
+} //end of getMovie-----------------------------------------------------------------------------------------------------
 
 function runMovie() {
     request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json", function(error, response, body) {
@@ -103,10 +107,31 @@ function runMovie() {
             console.log("Language: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-            var movieData = ('\n' + "Movie: " + JSON.parse(body).Title + '\n' + "Release Year: " + JSON.parse(body).Year + '\n' + "Rating: " + JSON.parse(body).imdbRating + '\n' + "Production Country: " + JSON.parse(body).Country + '\n' + "Language: " + JSON.parse(body).Language + "Plot: " + '\n' +  JSON.parse(body).Plot + "Actors: " + JSON.parse(body).Actors + '\n' + "Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + '\n');
+            if (JSON.parse(body).Ratings[1] != undefined){
+                console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            }        
+            var movieData = '\n' 
+            movieData += "Movie: " 
+            movieData += JSON.parse(body).Title
+            movieData += '\n' 
+            movieData += "Release Year: "
+            movieData += JSON.parse(body).Year 
+            movieData += '\n' 
+            movieData += "Rating: " + JSON.parse(body).imdbRating
+            movieData += '\n'
+            movieData += "Production Country: "
+            movieData += JSON.parse(body).Country
+            movieData += '\n'
+            movieData += "Language: " + JSON.parse(body).Language
+            movieData += '\n'
+            movieData += "Plot: " + JSON.parse(body).Plot
+            movieData += '\n'
+            movieData += "Actors: " + JSON.parse(body).Actors
+            movieData += '\n' + "Rotten Tomatoes Rating: " 
+            if (JSON.parse(body).Ratings[1] != undefined){
+                movieData += JSON.parse(body).Ratings[1].Value + '\n';
+            }
             writeLog (movieData);
-            // writeLog();
             // } trying to deal with no rotten tomatoes rating
             // else (response.statusCode === undefined){
             // console.log("Sorry, information not found!");
@@ -114,7 +139,7 @@ function runMovie() {
 
     });
 }
-
+// do what it says----------------------------------------------------------------------------------------------------------
 function getRandom() {
     fs.readFile("random.txt", "utf8", function(error, data) {
             var randomArr = data.split(",")
@@ -132,9 +157,9 @@ function getRandom() {
 
         }) //end of readFile 
 
-} //end of getRandom
+} //end of getRandom---------------------------------------------------------------------------------------------------------
 
-// Bonus code 
+// Bonus code ---------------------------------------------------------------------------------------------------------------
 function writeLog(tweetData, songData, movieData) {
     fs.appendFile("log.txt", tweetData, songData, movieData, function(err){
                     }); 
